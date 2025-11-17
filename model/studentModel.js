@@ -2,13 +2,13 @@ const db = require('../config/databse');
 
 const studentModel = {
     create: (student) => {
-        const {stuId,fname,
-            lname,email,dob,status} = student;
+        const {student_id,first_name,
+            last_name,email,dob,status} = student;
         const sql = `INSERT INTO students
         (student_id,first_name,last_name,email,
         dob,status) VALUES(?,?,?,?,?,?);`;
-        return db.execute(sql,[stuId,
-            fname,lname,email,dob,status]);
+        return db.execute(sql,[student_id,
+            first_name,last_name,email,dob,status]);
     },
     findAll:() => {
         const sql = `SELECT * FROM students WHERE students.status=1 
