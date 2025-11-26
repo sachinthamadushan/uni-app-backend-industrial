@@ -1,9 +1,16 @@
 const userModel = require('../model/userModel');
+const bcrypt = require('bcryptjs');
 
 const userController = {
     createUser:async(req,res) => {
         try {
-            const [result] = await userModel.create(req.body);
+            const {username,password} = req.body;
+            const length = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password,length)
+            const [result] = await userModel.create({
+                username:username,
+                password:hashedPassword
+            });
             if(result.affectedRows === 1){
                 return res.status(201).json({msg:'User saved!'});
             }else{
