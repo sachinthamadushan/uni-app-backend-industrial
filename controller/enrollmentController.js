@@ -55,6 +55,24 @@ const enrollmentConroller = {
         } catch (error) {
             res.status(500).json({msg:`Internal server error ${error}`});
         }
+    },
+    deleteEnrollment: async (req,res) => {
+        try {
+            const enrollmentId = req.params.eid;
+            const [findedEnrollment] = await enrollmentModel.findById(enrollmentId);
+            if (findedEnrollment.length === 0) {
+                return res.status(404).json({msg:'Enrollment not found'});
+            }
+            const [result] = await enrollmentModel.delete(enrollmentId);
+            if (result.affectedRows === 1) {
+                return res.status(200).json({msg:'Enrollment updated!'});
+            }else{
+                return res.status(400).json({msg:'Enrollment not updated!'});
+            }
+
+        } catch (error) {
+            res.status(500).json({msg:`Internal server error ${error}`});
+        }
     }
 }
 

@@ -8,7 +8,7 @@ const enrollmentModel = {
         return db.execute(sql, [stuId, courseId, enrollDate]);
     },
     findAll: () => {
-        const sql = `SELECT entrollments.entroll_date, CONCAT(students.first_name," ", 
+        const sql = `SELECT  entrollments.id, entrollments.entroll_date, CONCAT(students.first_name," ", 
                     students.last_name) AS full_name , courses.course_name, 
                     courses.course_fee FROM entrollments INNER JOIN students ON 
                     entrollments.student_id = students.student_id INNER JOIN courses ON
@@ -30,7 +30,10 @@ const enrollmentModel = {
         entroll_date=? WHERE entrollments.id=?`;
         return db.execute(sql, [stuId,courseId,enrollDate,enrollmentId]);
      },
-    delete: (enrollmentId) => { },
+    delete: (enrollmentId) => {
+        const sql = `DELETE FROM entrollments WHERE entrollments.id=?`;
+        return db.execute(sql,[enrollmentId]);
+     },
 }
 
 module.exports = enrollmentModel;

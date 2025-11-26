@@ -27,10 +27,10 @@ const studentModel = {
         return db.execute(sql,[searchText,searchText,searchText,searchText]);
     },
     update:(student,studetId) => {
-        const {fname,lname,email,dob} = student;
+        const {first_name,last_name,email,dob} = student;
         const sql = `UPDATE students SET first_name=?, last_name=?, email=?,
         dob=? WHERE student_id=?`;
-        return db.execute(sql, [fname,lname,email,dob,studetId]);
+        return db.execute(sql, [first_name,last_name,email,dob,studetId]);
     },
     delete:(studentId) => {
         const sql = `UPDATE students SET status=0 WHERE student_id=?`;
