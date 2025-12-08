@@ -5,6 +5,7 @@ const courseModule = {
         const sql = `SELECT * FROM courses WHERE status=1`;
         return databse.execute(sql);
     }
+    
 }
 
 module.exports = courseModule;
