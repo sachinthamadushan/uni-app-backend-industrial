@@ -24,7 +24,7 @@ const userController = {
                 return res.status(400).json({ msg: 'Username has already saved!' });
             }
         } catch (error) {
-            res.status(500).json({ msg: `Internal server error ${error}` });
+            res.status(500).json({ msg: `Internal server error ${error.message}` });
         }
     },
     userLogin: async (req, res) => {
